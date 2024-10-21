@@ -2,6 +2,7 @@ import express from "express";
 import config from "./config.js";
 import mongoose from "mongoose";
 import booksRoute from "./routes/booksRoute.js";
+import cors from 'cors';
 
 const PORT = config.port;
 const CONNECTION = config.connection;
@@ -9,6 +10,14 @@ const CONNECTION = config.connection;
 const app = express();
 
 app.use(express.json());
+
+app.use(
+    cors({
+        origin: '',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type']
+    })
+);
 
 app.get('/', (request, response) => {
     console.log(request);
